@@ -14,7 +14,7 @@ The admin also have a admin panel and with this panel admin can do such things l
 
 ### Prerequisites
 
-For runing this application to your loacal machine, you need:
+For runing this application to your local machine, you need:
 
 ```
 A C++ compiler
@@ -35,6 +35,7 @@ Run the main.cpp file
 ```
 
 After successfully run the application you'll see a console like this:
+
 ![](/AppHome.png)
 
 ### Necessary information 
