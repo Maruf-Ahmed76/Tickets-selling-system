@@ -13,10 +13,13 @@
 // Email : emon@gmail.com
 // Password : 12345
 
+
+// Please run
+// Please run
+// Please run
+
 #include <iostream>
-#include <typeinfo>
 #include <vector>
-#include<algorithm>
 using namespace std;
 
 // New user creation class
@@ -339,7 +342,6 @@ int main()
     }
     // Home component
     home();
-    //cout << users[0].get_user_info("email");
     return 0;
 }
 
