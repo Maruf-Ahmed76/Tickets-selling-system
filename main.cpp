@@ -56,7 +56,7 @@ public:
 
 };
 
-vector <new_users> users;
+vector <new_users*> users;
 
 
 
@@ -76,7 +76,7 @@ public:
     }
 };
 
-vector <new_bus> bus_store;
+vector <new_bus*> bus_store;
 
 
 
@@ -125,7 +125,7 @@ public:
             // checking user info
             for (int i = 0; i < users.size(); i++)
             {
-                if(email == users[i].get_user_info("email") && pass == users[i].get_user_info("password"))
+                if(email == users[i]->get_user_info("email") && pass == users[i]->get_user_info("password"))
                 {
                     return 1;
                     break;
@@ -140,9 +140,9 @@ public:
     int user_id(string email){
         for (int i = 0; i < users.size(); i++)
         {
-            if(email == users[i].get_user_info("email"))
+            if(email == users[i]->get_user_info("email"))
             {
-                return users[i].id;
+                return users[i]->id;
                 break;
             }
         }
@@ -293,15 +293,15 @@ void home()
 void initialize_users()
 {
     // 1st user
-    new_users new_user_1("Maruf","01789393745","maruf@gmail.com","12345");
+    new_users *new_user_1 = new new_users("Maruf","01789393745","maruf@gmail.com","12345");
     users.push_back(new_user_1);
     user_id++;
     // 2nd user
-    new_users new_user_2("Juairea","015010101010","juairea@gmail.com","12345");
+    new_users *new_user_2 = new new_users("Juairea","015010101010","juairea@gmail.com","12345");
     users.push_back(new_user_2);
     user_id++;
     // 3rd user
-    new_users new_user_3("Emon","017010101010","emon@gmail.com","12345");
+    new_users *new_user_3 = new new_users("Emon","017010101010","emon@gmail.com","12345");
     users.push_back(new_user_3);
     user_id++;
 }
@@ -310,21 +310,21 @@ void initialize_users()
 void initialize_bus()
 {
     // 1st bus
-    new_bus new_bus_1("01","Sajol","08:00","Dhaka","Bogura");
+    new_bus *new_bus_1 = new new_bus("01","Sajol","08:00","Dhaka","Bogura");
     for(int i = 0; i < 32; i++){
-        new_bus_1.sit[i] = 0;
+        new_bus_1->sit[i] = 0;
     }
     bus_store.push_back(new_bus_1);
     // 2nd bus
-    new_bus new_bus_2("02","Fahim","08:30","Dhaka","Barishal");
+    new_bus *new_bus_2 = new new_bus("02","Fahim","08:30","Dhaka","Barishal");
     for(int i = 0; i < 32; i++){
-        new_bus_2.sit[i] = 0;
+        new_bus_2->sit[i] = 0;
     }
     bus_store.push_back(new_bus_2);
     // 3rd bus
-    new_bus new_bus_3("03","Adif","09:00","Dhaka","Joypurhat");
+    new_bus *new_bus_3 = new new_bus("03","Adif","09:00","Dhaka","Joypurhat");
     for(int i = 0; i < 32; i++){
-        new_bus_3.sit[i] = 0;
+        new_bus_3->sit[i] = 0;
     }
     bus_store.push_back(new_bus_3);
 }
@@ -426,7 +426,7 @@ void create_account()
     cout << "\t\t\t\tEnter your password:";
     cin >> password;
     // Store user information
-    new_users new_user_obj(name, phone, email, password);
+    new_users *new_user_obj = new new_users(name, phone, email, password);
     // Push new user to the vector space
     users.push_back(new_user_obj);
     user_id++;
@@ -449,7 +449,7 @@ void user_panel(int users_id)
     if(users_id >= 0){
         int login_user_index = user_index(users_id);
         // store the user name
-        string user_name = users[login_user_index].get_user_info("name");
+        string user_name = users[login_user_index]->get_user_info("name");
         cout << "\t\t\t\tHi " << user_name << endl;
     }
 
@@ -499,7 +499,7 @@ void reserve_ticket(int users_id){
 
     // Update the bus sit status
     int bus_position = bus_index(bus_number);
-    bus_store[bus_position].sit[sit_number-1] = 1;
+    bus_store[bus_position]->sit[sit_number-1] = 1;
     // Go back
     system("cls");
     cout << "\t\t\t\tYour are done" << endl;
@@ -537,10 +537,10 @@ void my_tickets(int users_id){
             string bus_number = tickets_store[i].bus_number;
             int bus_position = bus_index(bus_number);
 
-            cout << "\t\t\t\tDriver name: " << bus_store[bus_position].driver_name << endl;
-            cout << "\t\t\t\tArrival time: " << bus_store[bus_position].arrival_time << endl;
-            cout << "\t\t\t\tFrom: " << bus_store[bus_position].from << endl;
-            cout << "\t\t\t\tTo: " << bus_store[bus_position].to << endl;
+            cout << "\t\t\t\tDriver name: " << bus_store[bus_position]->driver_name << endl;
+            cout << "\t\t\t\tArrival time: " << bus_store[bus_position]->arrival_time << endl;
+            cout << "\t\t\t\tFrom: " << bus_store[bus_position]->from << endl;
+            cout << "\t\t\t\tTo: " << bus_store[bus_position]->to << endl;
         }
      }
     if(t){
@@ -562,8 +562,8 @@ void profile(int users_id){
     cout << "\t\t\t\t\tYour profile" << endl;
     cout << "\t\t\t\t";
     line("*",25);
-    cout << "\t\t\t\tName: " << users[user_position].get_user_info("name") << endl;
-    cout << "\t\t\t\tEmail: " << users[user_position].get_user_info("email") << endl;
+    cout << "\t\t\t\tName: " << users[user_position]->get_user_info("name") << endl;
+    cout << "\t\t\t\tEmail: " << users[user_position]->get_user_info("email") << endl;
 
     // Go back
     int Back = go_back();
@@ -639,9 +639,9 @@ void add_bus()
     cin >> to;
 
     // Store all the information
-    new_bus add_new_bus(bus_no, driver_name, arriv, from, to);
+    new_bus *add_new_bus = new new_bus(bus_no, driver_name, arriv, from, to);
     for(int i = 0; i < 32; i++){
-        add_new_bus.sit[i] = 0;
+        add_new_bus->sit[i] = 0;
     }
     // store new bus
     bus_store.push_back(add_new_bus);
@@ -703,7 +703,7 @@ void admin_available_sit(){
 int bus_index(string bus_num){
     int bus_position;
     for(int i = 0; i < bus_store.size(); i++){
-        if(bus_store[i].bus_number == bus_num){
+        if(bus_store[i]->bus_number == bus_num){
             bus_position = i;
             return bus_position;
         }
@@ -714,7 +714,7 @@ int bus_index(string bus_num){
 int user_index(int users_id){
     int i;
     for(i = 0; i < users.size(); i++){
-        if(users[i].id == users_id){
+        if(users[i]->id == users_id){
             return i;
             break;
         }
@@ -730,9 +730,9 @@ void bus_list()
     {
         cout << "\t\t\t\t";
         line("*",50);
-        cout << "\t\t\t\tBus Number: " << bus_store[i].bus_number << "\t\tDriver Name: " << bus_store[i].driver_name << endl << endl;
-        cout << "\t\t\t\tArrival Time: "<< bus_store[i].arrival_time << endl << endl;
-        cout << "\t\t\t\tFrom: " << bus_store[i].from << "\t\tTo: " << bus_store[i].to << endl;
+        cout << "\t\t\t\tBus Number: " << bus_store[i]->bus_number << "\t\tDriver Name: " << bus_store[i]->driver_name << endl << endl;
+        cout << "\t\t\t\tArrival Time: "<< bus_store[i]->arrival_time << endl << endl;
+        cout << "\t\t\t\tFrom: " << bus_store[i]->from << "\t\tTo: " << bus_store[i]->to << endl;
     }
     cout << endl;
 
@@ -745,7 +745,7 @@ void available_sit(){
     cout << "\t\t\t\tAvailable bus number's: " << endl;
     cout << "\t\t\t\t";
     for(int i = 0; i < bus_store.size();i++){
-        cout << bus_store[i].bus_number << " ";
+        cout << bus_store[i]->bus_number << " ";
     }
     cout << "\n\n\t\t\t\tEnter the bus number: ";
     cin >> bus_number;
@@ -759,7 +759,7 @@ void available_sit(){
                 // print two decimal number
                 counter < 10 ? cout << "\t0" << counter : cout << "\t" << counter;
                 // check the sit status
-                if(bus_store[bus_position].sit[j] != 0){
+                if(bus_store[bus_position]->sit[j] != 0){
                     cout << ". Booked" << "\t";
                 }else{
                     cout << ". Empty" << "\t";
